@@ -123,6 +123,10 @@ export class MergeConflictsDialog extends React.Component<
     }
   }
 
+  private onDismissed = async () => {
+    this.props.onDismissed()
+  }
+
   private renderHeaderTitle(ourBranch: string, theirBranch?: string) {
     if (theirBranch !== undefined) {
       return (
@@ -314,11 +318,11 @@ export class MergeConflictsDialog extends React.Component<
     return (
       <Dialog
         id="merge-conflicts-list"
-        dismissable={false}
-        onDismissed={this.onCancel}
+        dismissable={true}
+        onDismissed={this.onDismissed}
         onSubmit={this.onSubmit}
       >
-        <DialogHeader title={headerTitle} dismissable={false} />
+        <DialogHeader title={headerTitle} dismissable={true} />
         <DialogContent>
           {this.renderContent(unmergedFiles, conflictedFilesCount)}
         </DialogContent>
